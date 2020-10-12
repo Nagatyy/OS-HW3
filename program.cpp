@@ -30,7 +30,7 @@ class Thread : public QThread {
             if(fin.eof()){
                 return;
             }
-            cout << "Thread " << ID + 1 << " is running\n";
+            cout << "Thread " << ID  << " is running\n";
             string currentLine;
             key1.lock();
             getline(fin, currentLine);
@@ -63,7 +63,7 @@ int main(int argc, char** argv){
 
     int numberOfProcessors = (int) thread::hardware_concurrency();
     Thread* threads[numberOfProcessors];
-    bool* isDone[numberOfProcessors];
+    bool* isDone = new bool[numberOfProcessors];
     // the above array is used to prevent threads leaking. A new thread will only be made if its
     // status in the above array is "true". It is set to true when a thread is finished executing
 
@@ -102,7 +102,7 @@ int main(int argc, char** argv){
 
             // only create a new thread with ID n once thread with ID n is finished executing
             if(threads[i] != NULL and *isDone[i] == true){
-                threads[i] = new Thread(i, target);
+                threads[i] = new Thread(i+1, target);
                 threads[i] -> start();
 
             }
