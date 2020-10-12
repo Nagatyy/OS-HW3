@@ -108,7 +108,7 @@ int main(int argc, char** argv){
     fin.close();
     delete[] isDone;
 
-    cout  << "We found " << occurences << " occurences of the string \"" << " " + target + "\n";
+    cout  << "We found " << occurences << " occurences of the string \"" << target + "\"\n";
 
 
     return 0;
