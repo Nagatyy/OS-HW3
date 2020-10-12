@@ -38,7 +38,7 @@ int main(int argc, char** argv){
 
     int numberOfProcessors = (int) thread::hardware_concurrency();
 
-    cout << numberOfProcessors << std::endl
+    cout << numberOfProcessors << std::endl;
 
     // if (argc != 3){
     //     std::cout << "Incorrect Number of Arguments!" <<std::endl;
