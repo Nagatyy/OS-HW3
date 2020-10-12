@@ -88,7 +88,7 @@ int main(int argc, char** argv){
             threads[i] = new Thread(i, target);
             threads[i] -> start();
 
-            if(threads[i] -> isFinished())
+            if(!(threads[i] -> isFinished()))
                 threads[i] -> wait();
         }
 
