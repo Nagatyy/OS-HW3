@@ -90,6 +90,10 @@ int main(int argc, char** argv){
         threads[i] = new Thread(i+1, target);
     }
 
+    string current;
+
+    getline(fin, current);
+
     
 
     while(!fin.eof()){
