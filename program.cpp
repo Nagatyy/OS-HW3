@@ -87,14 +87,14 @@ int main(int argc, char** argv){
     // all threads will have a status of done by default
     for(int i = 0; i < numberOfProcessors; i++){
         isDone[i] = true;
-        threads[i] = new Thread(target, i+1);
+        threads[i] = new Thread(i+1, target);
     }
 
     
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
-            
+
                 isDone[i] = threads[i] -> isFinished() ? true : false;
 
             // if(threads[i] -> isFinished()){
