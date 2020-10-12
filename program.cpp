@@ -1,120 +1,57 @@
-#include <QThread>
+//CMP310 HW3
 #include <iostream>
-#include<fstream>
-#include<string>
-#include<vector>
+#include <fstream>
+#include <QThread>
+#include <QMutex>
+#include <thread>
+#include <string>
 
 using namespace std;
 
-vector<vector<int> > vec;
-int total = 0;
-
-void add(vector< vector<int> > &vec, int line , int word){
-
-        vector<int> v1;
-        v1.push_back(line);
-        v1.push_back(word);
-        vec.push_back(v1);
-
-}
+ifstream fin;
 
 
-bool available(vector< vector<int> > &vec, int line, int word){
 
-    bool var = false;
-    for (int i = 0; i < vec.size(); i++) {
+class Thread : public QThread {
+    private:
+        int ID;
+        std::string target;
 
-        if(vec[i][0] == line && vec[i][1] == word){
-
-         return true;
-         break;
+    public:
+        Thread(int ID, string target, int startPos, int endPos){
+            this.ID = ID;
+            this.target = target;
         }
 
-        else continue;
-    }
-    return var;
+        void run(){
+            string currentLine;
 
-}
+        }
 
-class MyThread: public QThread {
-  private:
-  int ID;
-  string filename;
-  string word;
-
-  public:
-  MyThread(int i, string filename, string word)  {
-  ID = i;
-  this->filename = filename;
-  this->word = word;
-  }
-   ifstream file;
-   int count = 0;
-
-        //int lineNum = 0;
-        //int wordNum= 0;
-
-  void run() {
-
-          int lineNum = 0;
-        int wordNum= 0;
-
-         cout << "Thread " << ID << " is running\n";
-
-        file.open(filename.c_str());
-
-        lineNum++;
-        string readWord;
-
-        while (file >> readWord)
-    {
-
-			if(file.get() == '\n'){
-                lineNum++;
-                wordNum = 0;
-                continue;
-
-			}
-
-           wordNum++;
-
-			if(available(vec,lineNum,wordNum)){
-                    continue;
-			}
-
-			if(readWord == word){
-					count++;
-					total++;
-					add(vec,lineNum,wordNum);
-					sleep(2);
-			}
-
-    }
-        cout << "total searches found by Thread " << ID << " are " << count << endl;
-
-  }
 
 
 };
 
 
 
-int main() {
+int main(int argc, char** argv){
 
-        string filename = "searchfile.txt";
-        string word = "raza";
+    int numberOfProcessors = (int) thread::hardware_concurrency();
 
-  MyThread * x[4];
-  for (int i = 0; i < 4; i++) {
-    x[i] = new MyThread(i, filename, word);
-    x[i] -> start();
- //   x[i]->wait();
-  }
+    cout << numberOfProcessors << std::endl
 
-   for(int i=0;i<4;i++)
-        x[i]->wait();
+    // if (argc != 3){
+    //     std::cout << "Incorrect Number of Arguments!" <<std::endl;
+    //     return 0; //exit
+    // }
 
-cout << "final num of  matches found = " << total << endl;
+    string target = argv[1];
+    string fileName = argv[2];
 
-  return 0;
+    // fin.open(fileName);
+
+    // if(fin.fail())
+
+
+    return 0;
 }
