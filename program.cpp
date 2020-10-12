@@ -63,6 +63,9 @@ int main(int argc, char** argv){
 
     int numberOfProcessors = (int) thread::hardware_concurrency();
     Thread* threads[numberOfProcessors];
+    bool* isDone[numberOfProcessors];
+    // the above array is used to prevent threads leaking. A new thread will only be made if its
+    // status in the above array is "true". It is set to true when a thread is finished executing
 
 
     if (argc != 3){
@@ -81,10 +84,29 @@ int main(int argc, char** argv){
     }
 
 
+    // all threads will have a status of done by default
+    for(int i = 0; i < numberOfProcessors; i++)
+        isDone[i] = true;
+    
+
+
     while(!fin.eof()){
         for(int i = 1; i <= numberOfProcessors; i++){
-            threads[i] = new Thread(i, target);
-            threads[i] -> start();
+
+            arrayOfStatuses = threads[i] -> isFinished() ? true : false;
+
+            // if(threads[i] -> isFinished()){
+            //     arrayOfStatuses = true;
+            // }
+
+
+            // only create a new thread with ID n once thread with ID n is finished executing
+            if(threads[i] != NULL and arrayOfStatuses[i] = true){
+                threads[i] = new Thread(i, target);
+                threads[i] -> start();
+
+            }
+
 
             if((threads[i] -> isFinished()))
                 threads[i] -> wait();
