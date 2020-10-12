@@ -12,10 +12,7 @@ using namespace std;
 
 QMutex key1, key2;
 ifstream fin;
-int count = 0;
-
-
-
+int occurences = 0;
 
 
 
@@ -49,12 +46,12 @@ class Thread : public QThread {
                 // to search the line for the number of occurences of target
                 while ((pos = currentLine.find(target, pos)) != std::string::npos) {
                     key2.lock();
-                    count++;
+                    occurences++;
                     key1.unlock();
                     pos += target.length();
                 }
 
-                cout << "Thread " << ID << " found " << count << " occurences\n";
+                cout << "Thread " << ID << " found " << occurences << " occurences\n";
             }
         }
 
@@ -100,7 +97,7 @@ int main(int argc, char** argv){
 
 
 
-    cout << "Count: " << count << "\n";
+    cout << "Count: " << occurences << "\n";
 
 
     return 0;
