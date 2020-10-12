@@ -30,6 +30,10 @@ class Thread : public QThread {
         }
 
         void run(){
+
+            if(fin.eof){
+                this -> terminate();
+            }
             cout << "Thread " << ID << " is running\n";
             string currentLine;
             key1.lock();
@@ -41,10 +45,10 @@ class Thread : public QThread {
                 cout << "EOF Reached\n";
             }
             else {
-                int pos = 0;
+                int pos = currentLine.find(target, 0);
 
                 // to search the line for the number of occurences of target
-                while ((pos = currentLine.find(target, pos)) != std::string::npos) {
+                while (pos != std::string::npos) {
                     key2.lock();
                     occurences++;
                     key1.unlock();
@@ -65,7 +69,6 @@ int main(int argc, char** argv){
 
     int numberOfProcessors = (int) thread::hardware_concurrency();
     Thread* threads[numberOfProcessors];
-
 
 
     if (argc != 3){
