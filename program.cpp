@@ -90,11 +90,10 @@ int main(int argc, char** argv){
             if(threads[i] -> isFinished())
                 threads[i] -> wait();
         }
-        wait();
 
     }
     for(int i = 1; i <= numberOfProcessors; i++)
-            threads[i] -> join();
+            threads[i] -> wait();
 
 
 
