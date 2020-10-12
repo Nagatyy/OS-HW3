@@ -86,14 +86,14 @@ int main(int argc, char** argv){
 
     // all threads will have a status of done by default
     for(int i = 0; i < numberOfProcessors; i++)
-        *isDone[i] = true;
+        isDone[i] = true;
     
 
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
 
-            *isDone[i] = threads[i] -> isFinished() ? true : false;
+            isDone[i] = threads[i] -> isFinished() ? true : false;
 
             // if(threads[i] -> isFinished()){
             //     arrayOfStatuses = true;
@@ -101,7 +101,7 @@ int main(int argc, char** argv){
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
-            if(threads[i] != NULL and *isDone[i] == true){
+            if(threads[i] != NULL and isDone[i] == true){
                 threads[i] = new Thread(i+1, target);
                 threads[i] -> start();
 
