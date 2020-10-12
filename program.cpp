@@ -33,8 +33,10 @@ class Thread : public QThread {
         void run(){
             cout << "Thread " << ID << " is running\n";
             string currentLine;
+            key1.lock();
             getline(fin, currentLine);
             cout << "Line: " << currentLine << "\n";
+            key1.unlock();
 
             if(fin.eof())
                 this -> terminate();
@@ -42,7 +44,9 @@ class Thread : public QThread {
 
                 // to search the line for the number of occurences of target
                 while ((pos = currentLine.find(target, pos)) != std::string::npos) {
+                    key2.lock();
                     count++;
+                    key1.unlock();
                     pos += target.length();
                 }
 
