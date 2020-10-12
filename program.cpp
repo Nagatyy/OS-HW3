@@ -90,6 +90,7 @@ int main(int argc, char** argv){
             if(threads[i] -> isFinished())
                 threads[i] -> wait();
         }
+        wait();
 
     }
 
