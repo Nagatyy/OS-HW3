@@ -40,19 +40,21 @@ class Thread : public QThread {
             getline(fin, currentLine);
             cout << "Line: " << currentLine << "\n";
             key1.unlock();
+            int currentCount = 0;
 
             
             // to search the line for the number of occurences of target
-            int nPos = currentLine.find(target, 0); 
-            while(nPos != string::npos){
-                key2.lock();
-                occurences++;
-                key2.unlock();
-                nPos = currentLine.find(target, (nPos + target.size()));
+            int pos = currentLine.find(target, 0); 
+            while(pos != -1){
+                currentCount++;
+                pos = currentLine.find(target, (pos + target.size()));
             }
+            key2.lock();
+            occurences+=currentCount;
+            key2.unlock;
 
             key1.lock();
-            cout << "Thread " << ID << " found " << occurences << " occurences\n";
+            cout << "Thread " << ID << " found " << currentCount << " occurences\n";
             key1.unlock();
             
         }
