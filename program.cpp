@@ -93,19 +93,19 @@ int main(int argc, char** argv){
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
 
-            // isDone[i] = threads[i] -> isFinished() ? true : false;
+            isDone[i] = (threads[i] != NULL && threads[i] -> isFinished()) ? true : false;
 
-            // if(threads[i] -> isFinished()){
-            //     arrayOfStatuses = true;
-            // }
+            if(threads[i] -> isFinished()){
+                arrayOfStatuses = true;
+            }
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
-            // if(threads[i] != NULL and isDone[i] == true){
+            if(threads[i] != NULL and isDone[i] == true){
                 threads[i] = new Thread(i+1, target);
                 threads[i] -> start();
 
-            // }
+            }
 
 
             if((threads[i] -> isFinished()))
@@ -116,6 +116,10 @@ int main(int argc, char** argv){
 
     for(int i = 0; i < numberOfProcessors; i++)
         threads[i] -> wait();
+
+    fin.close()
+    delete[] isDone;
+    delete[] threads;
 
 
 
