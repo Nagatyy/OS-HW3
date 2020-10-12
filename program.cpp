@@ -37,8 +37,9 @@ class Thread : public QThread {
             cout << "Line: " << currentLine << "\n";
             key1.unlock();
 
-            if(fin.eof())
-                this -> terminate();
+            if(fin.eof()){
+                cout << "EOF Reached\n";
+            }
             else {
                 int pos = 0;
 
@@ -88,8 +89,8 @@ int main(int argc, char** argv){
             threads[i] = new Thread(i, target);
             threads[i] -> start();
 
-            if(!(threads[i] -> isFinished()))
-                threads[i] -> wait();
+            // if(!(threads[i] -> isFinished()))
+            //     threads[i] -> wait();
         }
 
     }
