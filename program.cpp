@@ -32,7 +32,7 @@ class Thread : public QThread {
         void run(){
 
             if(fin.eof()){
-                this -> terminate();
+                return;
             }
             cout << "Thread " << ID << " is running\n";
             string currentLine;
@@ -41,24 +41,21 @@ class Thread : public QThread {
             cout << "Line: " << currentLine << "\n";
             key1.unlock();
 
-            if(fin.eof()){
-                cout << "EOF Reached\n";
-            }
-            else {
-                int pos = currentLine.find(target, 0);
+            
+            int pos = currentLine.find(target, 0);
 
-                // to search the line for the number of occurences of target
-                while (pos != std::string::npos) {
-                    key2.lock();
-                    occurences++;
-                    key1.unlock();
-                    pos += target.length();
-                }
-
-                key1.lock();
-                cout << "Thread " << ID << " found " << occurences << " occurences\n";
-                key1.unlock();
+            // to search the line for the number of occurences of target
+            while (pos != std::string::npos) {
+                key2.lock();
+                occurences++;
+                key2.unlock();
+                pos += target.length();
             }
+
+            key1.lock();
+            cout << "Thread " << ID << " found " << occurences << " occurences\n";
+            key1.unlock();
+            
         }
 
 };
