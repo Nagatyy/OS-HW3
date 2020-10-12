@@ -87,17 +87,15 @@ int main(int argc, char** argv){
     // all threads will have a status of done by default
     for(int i = 0; i < numberOfProcessors; i++){
         isDone[i] = true;
-        threads[i] = NULL;
+        threads[i] = new Thread(target, i+1);
     }
 
     
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
-
-            // if(threads[i] == NULL)
-
-            isDone[i] = (threads[i] != NULL && threads[i] -> isFinished()) ? true : false;
+            
+                isDone[i] = threads[i] -> isFinished() ? true : false;
 
             // if(threads[i] -> isFinished()){
             //     arrayOfStatuses = true;
