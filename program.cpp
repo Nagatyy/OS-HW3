@@ -41,9 +41,9 @@ class Thread : public QThread {
             cout << "Line: " << currentLine << "\n";
             key1.unlock();
 
-            // if(fin.eof()){
-            //     cout << "EOF Reached\n";
-            // }
+            if(fin.eof()){
+                cout << "EOF Reached\n";
+            }
             else {
                 int pos = currentLine.find(target, 0);
 
