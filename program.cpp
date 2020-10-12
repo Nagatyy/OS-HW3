@@ -51,7 +51,7 @@ class Thread : public QThread {
             }
             key2.lock();
             occurences+=currentCount;
-            key2.unlock;
+            key2.unlock();
 
             key1.lock();
             cout << "Thread " << ID << " found " << currentCount << " occurences\n";
