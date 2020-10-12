@@ -95,9 +95,9 @@ int main(int argc, char** argv){
 
             isDone[i] = (threads[i] != NULL && threads[i] -> isFinished()) ? true : false;
 
-            if(threads[i] -> isFinished()){
-                arrayOfStatuses = true;
-            }
+            // if(threads[i] -> isFinished()){
+            //     arrayOfStatuses = true;
+            // }
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
