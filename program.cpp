@@ -69,7 +69,7 @@ int main(int argc, char** argv){
     while(!fin.eof()){
         for(int i = 1; i <= numberOfProcessors; i++){
             threads[i] = new Thread(i, target);
-            thread[i] -> start()
+            threads[i] -> start()
 
             if(fin.eof()) // for the case where number of lines is not divisible by number of threads
                 break;
