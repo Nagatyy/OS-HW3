@@ -19,8 +19,8 @@ class Thread : public QThread {
 
     public:
         Thread(int ID, string target, int startPos, int endPos){
-            this.ID = ID;
-            this.target = target;
+            this -> ID = ID;
+            this -> target = target;
         }
 
         void run(){
