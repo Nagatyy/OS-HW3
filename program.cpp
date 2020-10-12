@@ -30,11 +30,11 @@ class Thread : public QThread {
             if(fin.eof()){
                 return;
             }
-            cout << "Thread " << ID  << " is running\n";
+            // cout << "Thread " << ID  << " is running\n";
             string currentLine;
             key1.lock();
             getline(fin, currentLine);
-            cout << "Line: " << currentLine << "\n";
+            // cout << "Line: " << currentLine << "\n";
             key1.unlock();
             int currentCount = 0;
 
@@ -47,14 +47,8 @@ class Thread : public QThread {
             }
             key1.lock();
             occurences+=currentCount;
-            key1.unlock();
-
-            // key1.lock();
-            // cout << "Thread " << ID << " found " << currentCount << " occurences\n";
-            // key1.unlock();
-            
+            key1.unlock(); 
         }
-
 };
 
 
@@ -83,7 +77,6 @@ int main(int argc, char** argv){
         return 0;
     }
 
-
     // all threads will have a status of done by default
     for(int i = 0; i < numberOfProcessors; i++){
         isDone[i] = true;
@@ -95,38 +88,27 @@ int main(int argc, char** argv){
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
-
             isDone[i] = threads[i] -> isFinished() ? true : false;
 
-
             // only create a new thread with ID n once thread with ID n is finished executing
+            // this is done to avoid a thread being reallocated before it is finished execution
             if(isDone[i]){
                 threads[i] = new Thread(i+1, target);
                 threads[i] -> start();
 
             }
-
-
-            // if((threads[i] -> isFinished()))
-            //     threads[i] -> wait();
         }
-
     }
 
+
+    // to join all threads
     for(int i = 0; i < numberOfProcessors; i++)
         threads[i] -> wait();
 
     fin.close();
     delete[] isDone;
-    //delete[] threads;
 
-
-
-
-        
-
-
-    cout << "Count: " << occurences << "\n";
+    cout  << "We found " << occurences << " occurences of the string \"" << " " + target + "\n";
 
 
     return 0;
