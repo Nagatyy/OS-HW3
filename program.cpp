@@ -48,7 +48,7 @@ class Thread : public QThread {
                 key2.lock();
                 occurences++;
                 key2.unlock();
-                nPos = line.find(target, (nPos + target.size()));
+                nPos = currentLine.find(target, (nPos + target.size()));
             }
 
             key1.lock();
