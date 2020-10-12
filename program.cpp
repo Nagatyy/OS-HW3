@@ -115,7 +115,9 @@ int main(int argc, char** argv){
     }
 
     for(int i = 0; i < numberOfProcessors; i++)
-            threads[i] -> wait();
+        threads[i] -> wait();
+
+    delete[] isDone;
 
 
     fin.close();
