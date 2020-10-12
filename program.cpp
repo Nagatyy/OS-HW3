@@ -85,13 +85,17 @@ int main(int argc, char** argv){
 
 
     // all threads will have a status of done by default
-    for(int i = 0; i < numberOfProcessors; i++)
+    for(int i = 0; i < numberOfProcessors; i++){
         isDone[i] = true;
-    
+        threads[i] = NULL;
+    }
 
+    
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
+
+            // if(threads[i] == NULL)
 
             isDone[i] = (threads[i] != NULL && threads[i] -> isFinished()) ? true : false;
 
@@ -117,9 +121,9 @@ int main(int argc, char** argv){
     for(int i = 0; i < numberOfProcessors; i++)
         threads[i] -> wait();
 
-    fin.close();
+    // fin.close();
     delete[] isDone;
-    delete[] threads;
+    // delete[] threads;
 
 
 
