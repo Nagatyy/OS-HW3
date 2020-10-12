@@ -12,8 +12,6 @@ QMutex key1;
 ifstream fin;
 int occurences = 0;
 
-
-
 class Thread : public QThread {
     private:
         int ID;
@@ -84,7 +82,6 @@ int main(int argc, char** argv){
         threads[i] -> start();
 
     }
-    
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
@@ -100,7 +97,6 @@ int main(int argc, char** argv){
         }
     }
 
-
     // to join all threads
     for(int i = 0; i < numberOfProcessors; i++)
         threads[i] -> wait();
@@ -109,7 +105,6 @@ int main(int argc, char** argv){
     delete[] isDone;
 
     cout  << "We found " << occurences << " occurences of the string \"" << target + "\"\n";
-
 
     return 0;
 }
