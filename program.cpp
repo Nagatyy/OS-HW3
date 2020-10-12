@@ -88,22 +88,15 @@ int main(int argc, char** argv){
     for(int i = 0; i < numberOfProcessors; i++){
         isDone[i] = true;
         threads[i] = new Thread(i+1, target);
+        threads[i] -> start();
+
     }
-
-    string current;
-
-    getline(fin, current);
-
     
 
     while(!fin.eof()){
         for(int i = 0; i < numberOfProcessors; i++){
 
             isDone[i] = threads[i] -> isFinished() ? true : false;
-
-            // if(threads[i] -> isFinished()){
-            //     arrayOfStatuses = true;
-            // }
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
@@ -114,8 +107,8 @@ int main(int argc, char** argv){
             }
 
 
-            // if((threads[i] -> isFinished()))
-            //     threads[i] -> wait();
+            if((threads[i] -> isFinished()))
+                threads[i] -> wait();
         }
 
     }
