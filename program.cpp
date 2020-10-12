@@ -107,8 +107,8 @@ int main(int argc, char** argv){
             }
 
 
-            if((threads[i] -> isFinished()))
-                threads[i] -> wait();
+            // if((threads[i] -> isFinished()))
+            //     threads[i] -> wait();
         }
 
     }
@@ -118,7 +118,7 @@ int main(int argc, char** argv){
 
     // fin.close();
     delete[] isDone;
-    // delete[] threads;
+    delete[] threads;
 
 
 
