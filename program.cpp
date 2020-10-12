@@ -34,6 +34,9 @@ class Thread : public QThread {
             cout << "Thread " << ID << " is running\n";
             string currentLine;
             getline(fin, currentLine);
+
+            if(fin.eof())
+                this -> exit();
         }
 
 
@@ -71,8 +74,8 @@ int main(int argc, char** argv){
             threads[i] = new Thread(i, target);
             threads[i] -> start();
 
-            if(fin.eof()) // for the case where number of lines is not divisible by number of threads
-                break;
+            // if(fin.eof()) // for the case where number of lines is not divisible by number of threads
+            //     break;
 
             threads[i] -> wait();
         }
