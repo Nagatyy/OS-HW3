@@ -93,6 +93,10 @@ int main(int argc, char** argv){
         wait();
 
     }
+    for(int i = 1; i <= numberOfProcessors; i++)
+            threads[i] -> join();
+
+
 
     cout << "Count: " << count << "\n";
 
