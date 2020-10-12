@@ -42,10 +42,8 @@ class Thread : public QThread {
             key1.unlock();
 
             
-            int pos = currentLine.find(target, 0);
-
             // to search the line for the number of occurences of target
-            int nPos = line.find(target, 0); 
+            int nPos = currentLine.find(target, 0); 
             while(nPos != string::npos){
                 key2.lock();
                 occurences++;
