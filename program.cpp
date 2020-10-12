@@ -51,7 +51,9 @@ class Thread : public QThread {
                     pos += target.length();
                 }
 
+                key1.lock();
                 cout << "Thread " << ID << " found " << occurences << " occurences\n";
+                key1.unlock();
             }
         }
 
@@ -92,10 +94,6 @@ int main(int argc, char** argv){
         }
 
     }
-    for(int i = 1; i <= numberOfProcessors; i++)
-            threads[i] -> wait();
-
-
 
     cout << "Count: " << occurences << "\n";
 
