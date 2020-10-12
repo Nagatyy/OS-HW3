@@ -31,7 +31,7 @@ class Thread : public QThread {
 
         void run(){
 
-            if(fin.eof){
+            if(fin.eof()){
                 this -> terminate();
             }
             cout << "Thread " << ID << " is running\n";
@@ -41,9 +41,9 @@ class Thread : public QThread {
             cout << "Line: " << currentLine << "\n";
             key1.unlock();
 
-            if(fin.eof()){
-                cout << "EOF Reached\n";
-            }
+            // if(fin.eof()){
+            //     cout << "EOF Reached\n";
+            // }
             else {
                 int pos = currentLine.find(target, 0);
 
