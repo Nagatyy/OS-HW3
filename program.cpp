@@ -30,7 +30,6 @@ class Thread : public QThread {
         }
 
         void run(){
-            std::cout << "Hello\n";
             cout << "Thread " << ID << " is running\n";
             string currentLine;
             key1.lock();
@@ -94,6 +93,12 @@ int main(int argc, char** argv){
         }
 
     }
+
+    for(int i = 1; i <= numberOfProcessors; i++)
+            threads[i] -> wait();
+
+        
+
 
     cout << "Count: " << occurences << "\n";
 
