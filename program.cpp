@@ -30,7 +30,7 @@ class Thread : public QThread {
             if(fin.eof()){
                 return;
             }
-            cout << "Thread " << ID << " is running\n";
+            cout << "Thread " << ID + 1 << " is running\n";
             string currentLine;
             key1.lock();
             getline(fin, currentLine);
@@ -91,9 +91,9 @@ int main(int argc, char** argv){
 
 
     while(!fin.eof()){
-        for(int i = 1; i <= numberOfProcessors; i++){
+        for(int i = 0; i < numberOfProcessors; i++){
 
-            arrayOfStatuses = threads[i] -> isFinished() ? true : false;
+            isDone[i] = threads[i] -> isFinished() ? true : false;
 
             // if(threads[i] -> isFinished()){
             //     arrayOfStatuses = true;
@@ -101,7 +101,7 @@ int main(int argc, char** argv){
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
-            if(threads[i] != NULL and arrayOfStatuses[i] = true){
+            if(threads[i] != NULL and isDone[i] = true){
                 threads[i] = new Thread(i, target);
                 threads[i] -> start();
 
@@ -114,7 +114,7 @@ int main(int argc, char** argv){
 
     }
 
-    for(int i = 1; i <= numberOfProcessors; i++)
+    for(int i = 0; i < numberOfProcessors; i++)
             threads[i] -> wait();
 
         
