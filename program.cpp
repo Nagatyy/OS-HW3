@@ -12,6 +12,8 @@ using namespace std;
 
 QMutex key1, key2;
 ifstream fin;
+int count = 0;
+
 
 
 
@@ -42,6 +44,7 @@ class Thread : public QThread {
             if(fin.eof())
                 this -> terminate();
             else {
+                int pos = 0;
 
                 // to search the line for the number of occurences of target
                 while ((pos = currentLine.find(target, pos)) != std::string::npos) {
@@ -62,7 +65,6 @@ class Thread : public QThread {
 int main(int argc, char** argv){
 
     int numberOfProcessors = (int) thread::hardware_concurrency();
-    int count = 0;
     Thread* threads[numberOfProcessors];
 
 
