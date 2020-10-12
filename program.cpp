@@ -37,7 +37,7 @@ class Thread : public QThread {
             cout << "Line: " << currentLine << "\n";
 
             if(fin.eof())
-                this -> exit();
+                this -> terminate();
             else {
 
                 // to search the line for the number of occurences of target
@@ -90,8 +90,6 @@ int main(int argc, char** argv){
     }
 
     cout << "Count: " << count << "\n";
-
-
 
 
     return 0;
