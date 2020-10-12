@@ -118,6 +118,7 @@ int main(int argc, char** argv){
         threads[i] -> wait();
 
     delete[] isDone;
+    delete[] threads;
 
 
     fin.close();
