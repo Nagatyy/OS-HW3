@@ -34,6 +34,7 @@ class Thread : public QThread {
             cout << "Thread " << ID << " is running\n";
             string currentLine;
             getline(fin, currentLine);
+            cout << "Line: " << currentLine << "\n";
 
             if(fin.eof())
                 this -> exit();
