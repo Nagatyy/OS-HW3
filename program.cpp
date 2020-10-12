@@ -101,7 +101,7 @@ int main(int argc, char** argv){
 
 
             // only create a new thread with ID n once thread with ID n is finished executing
-            if(threads[i] != NULL and isDone[i] == true){
+            if(threads[i] != NULL and *isDone[i] == true){
                 threads[i] = new Thread(i, target);
                 threads[i] -> start();
 
