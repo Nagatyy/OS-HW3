@@ -45,12 +45,12 @@ class Thread : public QThread {
             int pos = currentLine.find(target, 0);
 
             // to search the line for the number of occurences of target
-            while (pos != std::string::npos) {
+            int nPos = line.find(target, 0); 
+            while(nPos != string::npos){
                 key2.lock();
                 occurences++;
                 key2.unlock();
-                pos += target.length();
-                currentLine.find(target, pos);
+                nPos = line.find(target, (nPos + target.size()));
             }
 
             key1.lock();
