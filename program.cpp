@@ -73,6 +73,8 @@ int main(int argc, char** argv){
 
             if(fin.eof()) // for the case where number of lines is not divisible by number of threads
                 break;
+
+            threads[i] -> wait();
         }
 
     }
