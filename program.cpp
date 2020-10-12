@@ -5,12 +5,10 @@
 #include <QMutex>
 #include <thread>
 #include <string>
-#include<vector>
-
 
 using namespace std;
 
-QMutex key1, key2;
+QMutex key1;
 ifstream fin;
 int occurences = 0;
 
@@ -20,13 +18,11 @@ class Thread : public QThread {
     private:
         int ID;
         string target;
-        //string line;
 
     public:
         Thread(int ID, string target){
             this -> ID = ID;
             this -> target = target;
-            // this -> line = line;
         }
 
         void run(){
@@ -49,13 +45,13 @@ class Thread : public QThread {
                 currentCount++;
                 pos = currentLine.find(target, (pos + target.size()));
             }
-            key2.lock();
-            occurences+=currentCount;
-            key2.unlock();
-
             key1.lock();
-            cout << "Thread " << ID << " found " << currentCount << " occurences\n";
+            occurences+=currentCount;
             key1.unlock();
+
+            // key1.lock();
+            // cout << "Thread " << ID << " found " << currentCount << " occurences\n";
+            // key1.unlock();
             
         }
 
