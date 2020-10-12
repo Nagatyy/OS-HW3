@@ -50,6 +50,7 @@ class Thread : public QThread {
                 occurences++;
                 key2.unlock();
                 pos += target.length();
+                currentLine.find(target, pos);
             }
 
             key1.lock();
