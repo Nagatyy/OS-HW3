@@ -37,9 +37,17 @@ class Thread : public QThread {
 
             if(fin.eof())
                 this -> exit();
+            else {
+
+                // to search the line for the number of occurences of target
+                while ((pos = currentLine.find(target, pos)) != std::string::npos) {
+                    count++;
+                    pos += target.length();
+                }
+
+                cout << "Thread " << ID << " found " << count << " occurences\n";
+            }
         }
-
-
 
 };
 
@@ -74,20 +82,13 @@ int main(int argc, char** argv){
             threads[i] = new Thread(i, target);
             threads[i] -> start();
 
-            // if(fin.eof()) // for the case where number of lines is not divisible by number of threads
-            //     break;
 
             threads[i] -> wait();
         }
 
     }
 
-
-
-
-
-
-
+    cout << "Count: " << count << "\n";
 
 
 
